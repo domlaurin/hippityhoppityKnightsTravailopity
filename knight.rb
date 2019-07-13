@@ -1,4 +1,5 @@
 require_relative 'polytree.rb'
+require 'byebug'
 
 class KnightPathFinder
     def initialize(pos)
@@ -11,15 +12,16 @@ class KnightPathFinder
         adders = [[-1,2],[1,2],[2,1],[-2,1],[-1,-2],[1,-2],[2,-1],[-2,-1]]
         validmoves = []
         adders.each do |adder|
-            move = pos.zip(adder).map &:sum
-            if move.all? &:between?(0,7)
+            move = pos.value.zip(adder).map {|a| a.sum}
+            if move.all? {|num| num.between?(0,7)}
                 validmoves << move
             end
         end
+        validmoves
     end 
 
     def new_move_positions(pos)
-        remaining_moves = self.valid_moves(pos) - @considered_positions
+        remaining_moves = KnightPathFinder.valid_moves(pos) - @considered_positions
         @considered_positions.concat(remaining_moves)
 
         remaining_moves
@@ -40,32 +42,14 @@ class KnightPathFinder
             queue.concat(new_nodes)
         end
         move_tree
-    end
-
-        
+    end  
 end
 
 
 
 
 
-def bfs(target_value)
-    array = [self]
-    until array.empty?
-        node = array.shift
-        if node.value == target_value
-            return node
-        else
-            array << node.children
-            array = array.flatten
-        end
-    end
-end
-
-
-
-
-plan:
+# plan:
     #up to 8 possible moves
 
     #call #self.valid_moves(pos) but filter out any positions already in @considered_positions
