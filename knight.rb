@@ -16,18 +16,22 @@ class KnightPathFinder
                 validmoves << move
             end
         end
-        #up to 8 possible moves
-    end
+    end 
+    #up to 8 possible moves
 
     def new_move_positions(pos)
-        #call #self.valid_moves(pos) but filter out any positions already in @considered_positions
-        #add remaining new positions to @considered_positions
-        #return these new positions
-    end
+        remaining_moves = self.valid_moves(pos) - @considered_positions
+        @considered_positions.concat(remaining_moves)
 
-    # def build_move_tree
-    #     #build move tree beginning with self.root_node
-    # end
+        remaining_moves
+    end
+    #call #self.valid_moves(pos) but filter out any positions already in @considered_positions
+    #add remaining new positions to @considered_positions
+    #return these new positions
+
+    def build_move_tree
+        #build move tree beginning with self.root_node
+    end
 
 end
 
