@@ -8,6 +8,8 @@ class KnightPathFinder
     end
 
     def self.valid_moves(pos)
+        [4,4]
+        
         #up to 8 possible moves
     end
 
@@ -23,5 +25,8 @@ class KnightPathFinder
 
 end
 
+plan:
+1. to help us 
+ [0,0][7,0],[7,7],[0,7]
 
- 
+
