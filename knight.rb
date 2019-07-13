@@ -1,9 +1,12 @@
+require_relative 'polytree.rb'
+
 class KnightPathFinder
     def initialize(pos)
-        @pos = pos
+        @root_node = PolyTreeNode(pos)
     end
 
 
 end
 
 
+ 
