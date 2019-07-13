@@ -41,11 +41,11 @@ class PolyTreeNode
     def bfs(target_value)
         array = [self]
         until array.empty?
-            boy = array.shift
-            if boy.value == target_value
-                return boy
+            node = array.shift
+            if node.value == target_value
+                return node
             else
-                array << boy.children
+                array << node.children
                 array = array.flatten
             end
         end
