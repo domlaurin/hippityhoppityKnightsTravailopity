@@ -4,7 +4,7 @@ class KnightPathFinder
     def initialize(pos)
         @root_node = PolyTreeNode(pos)
         @considered_positions = [pos]
-        #self.build_move_tree
+        self.build_move_tree
     end
 
     def self.valid_moves(pos)
@@ -17,7 +17,6 @@ class KnightPathFinder
             end
         end
     end 
-    #up to 8 possible moves
 
     def new_move_positions(pos)
         remaining_moves = self.valid_moves(pos) - @considered_positions
@@ -25,14 +24,43 @@ class KnightPathFinder
 
         remaining_moves
     end
-    #call #self.valid_moves(pos) but filter out any positions already in @considered_positions
-    #add remaining new positions to @considered_positions
-    #return these new positions
 
     def build_move_tree
-        #build move tree beginning with self.root_node
+        array = [@root_node]
+
+        until array.empty?
+            node = array.shift
+        end
+
+        #use new_move_positions(pos)
+        #use the bfs idea
+        #use a queue to process nodes in FIFO order
+        #start with root_node representing the start_pos
+        #explore moves from one position at a time
+        #next build nodes represting positions one move away, add these to the queue
+        #then take the next node from the queue ... until the queue is empty.
     end
 
 end
+def bfs(target_value)
+    array = [self]
+    until array.empty?
+        node = array.shift
+        if node.value == target_value
+            return node
+        else
+            array << node.children
+            array = array.flatten
+        end
+    end
+end
 
 
+
+
+plan:
+    #up to 8 possible moves
+
+    #call #self.valid_moves(pos) but filter out any positions already in @considered_positions
+    #add remaining new positions to @considered_positions
+    #return these new positions
