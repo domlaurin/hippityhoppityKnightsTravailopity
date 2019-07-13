@@ -6,3 +6,4 @@ Plan:
 #find_path
 
 create class method valid_moves(pos)
+ 
