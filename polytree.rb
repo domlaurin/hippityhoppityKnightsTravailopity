@@ -52,10 +52,8 @@ class PolyTreeNode
     end
 
     def inspect
-        @value.inspect
+        { 'value' => @value, 'parent_value' => @parent.value }.inspect
     end
 
 attr_reader :parent, :children, :value
 end
-
-  
