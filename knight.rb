@@ -8,8 +8,14 @@ class KnightPathFinder
     end
 
     def self.valid_moves(pos)
-        [4,4]
-        
+        adders = [[-1,2],[1,2],[2,1],[-2,1],[-1,-2],[1,-2],[2,-1],[-2,-1]]
+        validmoves = []
+        adders.each do |adder|
+            move = pos.zip(adder).map &:sum
+            if move.all? &:between?(0,7)
+                validmoves << move
+            end
+        end
         #up to 8 possible moves
     end
 
@@ -24,9 +30,5 @@ class KnightPathFinder
     # end
 
 end
-
-plan:
-1. to help us 
- [0,0][7,0],[7,7],[0,7]
 
 
