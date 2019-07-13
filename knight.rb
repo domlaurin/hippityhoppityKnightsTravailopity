@@ -45,18 +45,37 @@ class KnightPathFinder
     end  
 
     def find_path(end_pos)
+        array = [@root_node]
+
+        until array.empty?
+            node = array.shift
+            if node.value == end_pos
+                return node
+            else
+                array << node.children
+                array = array.flatten
+            end
+        end
+    end
+
+    def trace_path_back(node)
+
+        array = []
+        node.parent
 
     end
-    search for end_pos in the move_tree
-    use either dfs or bfs from the PolyTreeNode exercises, it doensn't' matter
-    this should return the tree node instance containing end_pos
+
+    # search for end_pos in the move_tree
+    # use either dfs or bfs from the PolyTreeNode exercises, it doensn't' matter
+    # this should return the tree node instance containing end_pos
 
     create #trace_path_back
     this should trace back from node to the root using PolyTreeNode#parent
     as it goes up and up toward the root - it should add the value to an array
+
     trace_path_back should return the values in order from the start position to the end position
     use trace_path_back to finish up find_path
-    
+
 end
 
 
