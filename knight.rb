@@ -67,7 +67,7 @@ class KnightPathFinder
         end
         array
     end
-
+ 
     # search for end_pos in the move_tree
     # use either dfs or bfs from the PolyTreeNode exercises, it doensn't' matter
     # this should return the tree node instance containing end_pos
