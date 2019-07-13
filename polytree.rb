@@ -58,4 +58,4 @@ class PolyTreeNode
 attr_reader :parent, :children, :value
 end
 
- 
+  
