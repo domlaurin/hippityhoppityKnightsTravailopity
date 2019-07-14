@@ -14,12 +14,15 @@ class KnightPathFinder
         validmoves = []
         adders.each do |adder|
 
-            move = pos.value.zip(adder).map {|a| a.sum}
-
-            if move.all? {|num| num.between?(0,7)}
-                validmoves.concat(PolyTreeNode.new(move))
+            new_move = pos.value.zip(adder).map {|a| a.sum}
+# debugger
+            if new_move.all? {|num| num.between?(0,7)}
+                nodeboy = PolyTreeNode.new(new_move)
+                pos.add_child(nodeboy)
+                validmoves << nodeboy
             end
         end
+
         validmoves
     end 
 
@@ -34,15 +37,10 @@ class KnightPathFinder
         queue = [@root_node]
         until queue.empty?
             position = queue.shift
-            new_nodes = new_move_positions(position).map do |pos| 
-                node = PolyTreeNode.new(pos)
-                node.children = KnightPathFinder.valid_moves
-                node
-            end
+            new_nodes = new_move_positions(position)
             @move_tree.concat(new_nodes)
             queue.concat(new_nodes)
         end
-        @move_tree
     end  
 
     def find_path(end_pos)
