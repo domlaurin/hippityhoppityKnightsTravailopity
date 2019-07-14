@@ -17,9 +17,9 @@ class KnightPathFinder
             new_move = pos.value.zip(adder).map {|a| a.sum}
 # debugger
             if new_move.all? {|num| num.between?(0,7)}
-                nodeboy = PolyTreeNode.new(new_move)
-                pos.add_child(nodeboy)
-                validmoves << nodeboy
+                # nodeboy = PolyTreeNode.new(new_move)
+                # pos.add_child(nodeboy)
+                validmoves << new_move
             end
         end
 
@@ -27,10 +27,13 @@ class KnightPathFinder
     end 
 
     def new_move_positions(pos)
-        remaining_moves = KnightPathFinder.valid_moves(pos) - @considered_positions
-        @considered_positions.concat(remaining_moves)
+        remaining_moves = KnightPathFinder.valid_moves(pos) - @considered_positions.map(&:value)
 
-        remaining_moves
+        positions_mapped_to_nodes = remaining_moves.map {|move| PolyTreeNode.new(move) }
+
+        @considered_positions.concat(positions_mapped_to_nodes)
+
+        positions_mapped_to_nodes
     end
 
     def build_move_tree
@@ -38,8 +41,10 @@ class KnightPathFinder
         until queue.empty?
             position = queue.shift
             new_nodes = new_move_positions(position)
+            new_nodes.each {|node| node.parent = position}
             @move_tree.concat(new_nodes)
             queue.concat(new_nodes)
+            # debugger
         end
     end  
 
@@ -50,7 +55,7 @@ class KnightPathFinder
         until array.empty?
             node = array.shift
             if node.value == end_pos
-                return trace_path_back(node)
+                return trace_path_back(node) << end_pos
             else
                 array.concat(node.children)
                 # array = array.flatten
@@ -66,9 +71,10 @@ class KnightPathFinder
             array.unshift(node.parent)
             node = array[0]
         end
-        array
+        array.map {|node| node.value}
     end
  
+    attr_reader :move_tree
 end
 
 # kpf = KnightPathFinder.new([0, 0])
